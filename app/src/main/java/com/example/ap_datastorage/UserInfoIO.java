@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class UserInfoIO {
@@ -16,7 +17,7 @@ public class UserInfoIO {
         String msg=null;
         FileOutputStream fos=null;
         try {
-            context.openFileOutput("MyData.txt",Context.MODE_PRIVATE);
+            fos=context.openFileOutput("MyData.txt",Context.MODE_PRIVATE);
             msg=username+":"+password;
             //getBytes()将字符串转换为0和1样式的字节。
             fos.write(msg.getBytes());
@@ -42,10 +43,17 @@ public class UserInfoIO {
         try {
             fis=context.openFileInput("MyData.txt");
             byte[] buffer=new byte[fis.available()];
+            //读取的内容存放到buffer里
             fis.read(buffer);
             String msg=new String(buffer);
+            String[] userinfo=msg.split(":");
+            Map<String,String> userMap=new HashMap<>();
+            userMap.put("username",userinfo[0]);
+            userMap.put("password",userinfo[1]);
+            return userMap;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
         finally {
             try {
