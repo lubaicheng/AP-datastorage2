@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#86FCE0"
+    android:background="#4DCBD6"
     tools:context=".MainActivity">
 
     <ImageView
@@ -15,6 +15,12 @@
         android:layout_height="100dp"
         android:background="@mipmap/ic_launcher">
     </ImageView>
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:text="溶液病毒检测"></TextView>
     <EditText
         android:id="@+id/Uname"
     android:layout_width="match_parent"
@@ -42,8 +48,5 @@
         android:text="登录"></Button>
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>

@@ -21,10 +21,12 @@ public class MainActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //提取编辑框中输入的用户名和密码，将它们写入到文件中。
-                String Uname=et_UserName.getText().toString();
-                String Pwd=et_PassWord.getText().toString();
-                if(UserInfoIO.saveUserInfo(Uname,Pwd,MainActivity.this)){
+                //提取编辑框中输入的用户名和密码，将它们写入到文件中,trim()方法用于删除字符串的头尾空白符。
+                String Uname=et_UserName.getText().toString().trim();
+                String Pwd=et_PassWord.getText().toString().trim();
+                //保存用户信息
+                boolean isSaneSuccess=UserInfo_SharePre.saveUserInfo(Uname,Pwd,MainActivity.this);
+                if(isSaneSuccess){
                     Toast.makeText(MainActivity.this,"注册成功",Toast.LENGTH_LONG).show();
 
                 }else{
@@ -37,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String Uname=et_UserName.getText().toString();
                 String Pwd=et_PassWord.getText().toString();
-                Map<String,String> userMap=UserInfoIO.getuserInfo(MainActivity.this);
-                if(Uname.equals(userMap.get("username"))&&Pwd.equals(userMap.get("password"))){
+                Map<String,String> userMap=UserInfo_SharePre.getUserInfo(MainActivity.this);
+                if(Uname.equals(userMap.get("Username"))&&Pwd.equals(userMap.get("Password"))){
                     Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_LONG).show();
 
                 }else{
